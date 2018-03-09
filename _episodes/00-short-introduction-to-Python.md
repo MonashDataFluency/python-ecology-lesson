@@ -314,21 +314,4 @@ the sequence of their items (i.e. the order in which key:value pairs were
 added to the dictionary). Because of this, the order in which items are
 returned from loops over dictionaries might appear random and can even change
 with time.
-
-
-
-## Functions
-
-Defining a section of code as a function in Python is done using the `def`
-keyword. For example a function that takes two arguments and returns their sum
-can be defined as:
-
-```python
-def add_function(a, b):
-    result = a + b
-    return result
-
-z = add_function(20, 22)
-print(z)
-42
 ```
