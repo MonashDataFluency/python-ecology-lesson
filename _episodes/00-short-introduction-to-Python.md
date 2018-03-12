@@ -20,7 +20,7 @@ of scripts and applications.
 Python's main advantages:
 
 * Open Source software, supported by Python Software Foundation
-* Available on all platforms
+* Available on all platforms (ie. Windows, Linux and MacOS) 
 * It is a general-purpose programming language
 * Supports multiple programming paradigms
 * Very large community with a rich ecosystem of third-party packages
@@ -59,7 +59,7 @@ Hello World
 One of the most basic things we can do in Python is assign values to variables:
 
 ```python
-text = "Data Carpentry"  # An example of a string
+text = "Data Fluency"  # An example of a string
 number = 42  # An example of an integer
 pi_value = 3.1415  # An example of a float
 ```
@@ -70,7 +70,7 @@ can type the name of the variable into the interpreter and press `Enter`:
 
 ```python
 >>> text
-"Data Carpentry"
+"Data Fluency"
 ```
 
 Everything in Python has a type. To get the type of something, we can pass it
@@ -93,7 +93,7 @@ We can also see the value of something using another built-in function, `print`:
 
 ```python
 >>> print(text)
-Data Carpentry
+Data Fluency
 >>> print(11)
 11
 ```
@@ -105,7 +105,7 @@ This may seem redundant, but in fact it's the only way to display output in a sc
 # A Python script file
 # Comments in Python start with #
 # The next line assigns the string "Data Carpentry" to the variable "text".
-text = "Data Carpentry"
+text = "Data Fluency"
 # The next line does nothing!
 text
 # The next line uses the print function to print out the value we assigned to "text"
@@ -114,7 +114,7 @@ print(text)
 *Running the script*
 ```bash
 $ python example.py
-Data Carpentry
+Data Fluency
 ```
 
 Notice that "Data Carpentry" is printed only once. 
@@ -227,11 +227,10 @@ another_tuple = ('blue', 'green', 'red')
 a_list = [1, 2, 3]
 ```
 
-> ## Challenge - Tuples
-> 1. What happens when you type `a_tuple[2]=5` vs `a_list[1]=5` ?
-> 2. Type `type(a_tuple)` into python - what is the object type?
->
-{: .challenge}
+## Challenge - Tuples
+1. What happens when you type `a_tuple[2]=5` vs `a_list[1]=5` ?
+2. Type `type(a_tuple)` into python - what is the object type?
+
 
 
 ## Dictionaries
@@ -273,41 +272,19 @@ To add an item to the dictionary we assign a value to a new key:
 Using `for` loops with dictionaries is a little more complicated. We can do
 this in two ways:
 
+
+
+## Challenge - Can you do reassignment in a dictionary? 
+1. First check what `rev` is right now (remember `rev` is the name of our dictionary). 
+    Type:
 ```python
->>> for key, value in rev.items():
-...     print(key, '->', value)
-...
-1 -> one
-2 -> two
-3 -> three
+ >>> rev
 ```
+2. Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "apple-sauce". 
 
-or
+3. Now display `rev` again to see if it has changed. 
 
-```python
->>> for key in rev.keys():
-...     print(key, '->', rev[key])
-...
-1 -> one
-2 -> two
-3 -> three
->>>
-```
 
-> ## Challenge - Can you do reassignment in a dictionary?
-> 
-> 1. First check what `rev` is right now (remember `rev` is the name of our dictionary). 
->     
->    Type:
-> ```python
-> >>> rev
-> ```
->
-> 2. Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "apple-sauce". 
->
-> 3. Now display `rev` again to see if it has changed. 
->
-{: .challenge}
 
 It is important to note that dictionaries are "unordered" and do not remember
 the sequence of their items (i.e. the order in which key:value pairs were
