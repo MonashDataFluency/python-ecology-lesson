@@ -78,11 +78,11 @@ to the built-in function `type`:
 
 ```python
 >>> type(text)
-<class 'str'>
+ str
 >>> type(number)
-<class 'int'>
+ int
 >>> type(6.02)
-<class 'float'>
+ float
 ```
 
 The variable `text` is of type `str`, short for "string". Strings hold
@@ -277,9 +277,11 @@ this in two ways:
 ## Challenge - Can you do reassignment in a dictionary? 
 1. First check what `rev` is right now (remember `rev` is the name of our dictionary). 
     Type:
+
 ```python
  >>> rev
 ```
+
 2. Try to reassign the second value (in the *key value pair*) so that it no longer reads "two" but instead reads "apple-sauce". 
 
 3. Now display `rev` again to see if it has changed. 
@@ -291,4 +293,4 @@ the sequence of their items (i.e. the order in which key:value pairs were
 added to the dictionary). Because of this, the order in which items are
 returned from loops over dictionaries might appear random and can even change
 with time.
-```
+
