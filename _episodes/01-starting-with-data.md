@@ -19,7 +19,7 @@ objectives:
     - "Create simple plots."
 ---
 
-# Working With Pandas DataFrames in Python
+# Working With Pandas DataFrames
 
 We can automate the process of performing data manipulations in Python. It's efficient to spend time
 building the code to perform these tasks because once it's built, we can use it
@@ -27,18 +27,7 @@ over and over on different datasets that use a similar format. This makes our
 methods easily reproducible. We can also easily share our code with colleagues
 and they can replicate the same analysis.
 
-### Starting in the same spot
-
-To help the lesson run smoothly, let's ensure everyone is in the same directory.
-This should help us avoid path and file name issues. At this time please
-navigate to the workshop directory. If you working in IPython Notebook be sure
-that you start your notebook in the workshop directory.
-
-A quick aside that there are Python libraries like [OS
-Library](https://docs.python.org/3/library/os.html) that can work with our
-directory structure, however, that is not our focus today.
-
-### Our Data
+### The Dataset
 
 For this lesson, we will be using the Portal Teaching data, a subset of the data
 from Ernst et al
@@ -115,7 +104,8 @@ time we call a Pandas function.
 
 # Reading CSV Data Using Pandas
 
-We will begin by locating and reading our survey data which are in CSV format. CSV stands for Comma-Separated Values and is a common way store formatted data. Other symbols my also be used, so you might see tab-separated, colon-separated or space separated files. It is quite easy to replace one separator with another, to match your application. The first line in the file often has headers to explain what is in each column. CSV (and other separators) make it easy to share data, and can be imported and exported from many applications, including Microsoft Excel. For more details on CSV files, see the [Data Organisation in Spreadsheets](http://www.datacarpentry.org/spreadsheet-ecology-lesson/05-exporting-data/) lesson.
+We will begin by locating and reading our survey data which are in CSV format. CSV stands for Comma-Separated Values and is a common way store formatted data. Other symbols my also be used, so you might see tab-separated, colon-separated or space separated files. It is quite easy to replace one separator with another, to match your application. The first line in the file often has headers to explain what is in each column. CSV (and other separators) make it easy to share data, and can be imported and exported from many applications, including Microsoft Excel. For mo
+
 We can use Pandas' `read_csv` function to pull the file directly into a
 [DataFrame](http://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe).
 
@@ -253,8 +243,10 @@ our screen:
 Again, we can use the `type` function to see what kind of thing `surveys_df` is:
 
 ```python
->>> type(surveys_df)
-<class 'pandas.core.frame.DataFrame'>
+type(surveys_df)
+
+## Returns
+pandas.core.frame.DataFrame
 ```
 
 As expected, it's a DataFrame (or, to use the full name that Python uses to refer
@@ -264,7 +256,9 @@ What kind of things does `surveys_df` contain? DataFrames have an attribute
 called `dtypes` that answers this:
 
 ```python
->>> surveys_df.dtypes
+surveys_df.dtypes
+
+## Returns
 record_id            int64
 month                int64
 day                  int64
@@ -309,12 +303,9 @@ what they return.
 
 1. `surveys_df.columns`
 2. `surveys_df.shape` Take note of the output of `shape` - what format does it
-   return the shape of the DataFrame in?
-    
-   HINT: [More on tuples, here](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences).
+   return the shape of the DataFrame in?   HINT: [More on tuples, here](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences).
 3. `surveys_df.head()` Also, what does `surveys_df.head(15)` do?
 4. `surveys_df.tail()`
-{: .challenge}
 
 
 ## Calculating Statistics From Data In A Pandas DataFrame
@@ -364,7 +355,6 @@ array(['NL', 'DM', 'PF', 'PE', 'DS', 'PP', 'SH', 'OT', 'DO', 'OX', 'SS',
   species are in the data?
 
 2. What is the difference between `len(plot_names)` and `surveys_df['plot_id'].nunique()`?
-{: .challenge}
 
 # Groups in Pandas
 
@@ -467,8 +457,6 @@ summary stats.
 	      max       231.000000
          ...
 ```
-{: .solution}
-{: .challenge}
 
 ## Quickly Creating Summary Counts in Pandas
 
@@ -488,13 +476,6 @@ Or, we can also count just the rows that have the species "DO":
 surveys_df.groupby('species_id')['record_id'].count()['DO']
 ```
 
-## Challenge - Make a list
-
- What's another way to create a list of species and associated `count` of the
-  records in the data? Hint: you can perform `count`, `min`, etc functions on
- groupby DataFrames in the same way you can perform them on regular DataFrames.
-{: .challenge}
-
 ## Basic Math Functions
 
 If we wanted to, we could perform math on an entire column of our data. For
@@ -502,17 +483,22 @@ example let's multiply all weight values by 2. A more practical use of this migh
 be to normalize the data according to a mean, area, or some other value
 calculated from our data.
 
-	# Multiply all weight values by 2
-	surveys_df['weight']*2
+```python
+# Multiply all weight values by 2
+surveys_df['weight']*2
+```
 
-# Quick & Easy Plotting Data Using Pandas
+## Quick & Easy Plotting Data Using Pandas
 
 We can plot our summary stats using Pandas, too.
 
-	# Make sure figures appear inline in Ipython Notebook
+```python
+import matplotlib
+## IMPORTANT STEP: Make sure figures appear inline in Ipython Notebook
 	%matplotlib inline
-	# Create a quick bar chart
+# Create a quick bar chart
 	species_counts.plot(kind='bar');
+```
 
 ![Weight by Species Plot](../fig/weightBySpecies.png)
 Weight by species plot

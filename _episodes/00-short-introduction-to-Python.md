@@ -1,5 +1,5 @@
 ---
-title: Short Introduction to Programming in Python
+title: Programming in Python (Introduction)
 teaching: 0
 exercises: 0
 questions:
@@ -122,6 +122,26 @@ Notice that "Data Carpentry" is printed only once.
 **Tip**: `print` and `type` are built-in functions in Python. Later in this
 lesson, we will introduce methods and user-defined functions. The Python
 documentation is excellent for reference on the differences between them.
+
+```python
+help (print)
+```
+
+Will give the output
+
+```
+Help on built-in function print in module builtins:
+
+print(...)
+    print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    
+    Prints the values to a stream, or to sys.stdout by default.
+    Optional keyword arguments:
+    file:  a file-like object (stream); defaults to the current sys.stdout.
+    sep:   string inserted between values, default a space.
+    end:   string appended after the last value, default a newline.
+    flush: whether to forcibly flush the stream.
+```
 
 ### Operators
 
@@ -268,11 +288,6 @@ To add an item to the dictionary we assign a value to a new key:
 >>> rev
 {1: 'one', 2: 'two', 3: 'three'}
 ```
-
-Using `for` loops with dictionaries is a little more complicated. We can do
-this in two ways:
-
-
 
 ## Challenge - Can you do reassignment in a dictionary? 
 1. First check what `rev` is right now (remember `rev` is the name of our dictionary). 
