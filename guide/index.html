@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-21 14:26:21 +1100">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Python for ecologists: Instructor Notes</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="http://datacarpentry.org" class="pull-left">
+        <img class="navbar-logo" src="../assets/img/dc-icon-black.svg" alt="Data Carpentry logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+	
+        
+        <li><a href="../setup/">Setup</a></li>
+        <li><a href="../reference/">Reference</a></li>
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-short-introduction-to-Python/">Programming in Python (Introduction)</a></li>
+            
+            <li><a href="../01-starting-with-data/">Data Analysis in Python</a></li>
+            
+            <li><a href="../02-index-slice-subset/">Indexing, Slicing and Subsetting DataFrames in Python</a></li>
+            
+            <li><a href="../03-data-types-and-format/">Data Types and Formats</a></li>
+            
+            <li><a href="../04-merging-data/">Combining DataFrames with Pandas</a></li>
+            
+            <li><a href="../05-loops/">Repeating Actions with Loops</a></li>
+            
+            <li><a href="../06-visualization-ggplot-python/">Making Plots With ggplot</a></li>
+            
+            <li><a href="../07-putting-it-all-together/">Data Ingest and Visualization - Matplotlib and Pandas</a></li>
+            
+            <li><a href="../08-working-with-sql/">Accessing SQLite Databases Using Python and Pandas</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../about/">About</a></li>
+            
+            <li><a href="../discuss/">Discussion</a></li>
+            
+            <li><a href="../figures/">Figures</a></li>
+            
+            <li><a href="../guide/">Instructor Notes</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../license/">License</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<h1 class="maintitle"><a href="../">Python for ecologists</a>: Instructor Notes</h1>
+
+<h1 id="challenge-solutions">Challenge solutions</h1>
+
+<h2 id="install-the-required-workshop-packages-on-mac-os-with-homebrew">Install the required workshop packages on Mac OS with Homebrew</h2>
+
+<p>Homebrew is one of the popular package managers used by many Mac users.</p>
+
+<p>To install Homebrew, you need have xcode command line tools installed,</p>
+
+<p>from the terminal, type:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select --install
+</code></pre></div></div>
+
+<p>then</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+</code></pre></div></div>
+
+<p>Run the following command to ensure Homebrew is installed properly:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew doctor
+</code></pre></div></div>
+
+<p>install python 3:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install python3
+</code></pre></div></div>
+
+<p>All the rest of workshop packages can be installed by pip3 which comes together with python 3:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install numpy pandas matplotlib jupyter
+pip3 install bokeh ggplot
+</code></pre></div></div>
+
+<p>pip3 can automatically figure out all the dependencies that required by the above packages.</p>
+
+<p>Launch a python command prompt, type:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3
+</code></pre></div></div>
+
+<h2 id="checking-installations">Checking installations.</h2>
+
+<p>In the include/scripts directory, you will find a script called check_env.py This checks the functionality of the Anaconda install.</p>
+
+<p>By default, Data Carpentry does not have people pull the whole repository with all the scripts and addenda. Therefore,
+you, as the instructor, get to decide how you’d like to provide this script to learners, if at all.
+To use this, students can navigate into includes/scripts terminal, and execute the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python check_env.py 
+</code></pre></div></div>
+
+<p>If learners receive an <code class="highlighter-rouge">AssertionError</code>, it will inform you how to help them correct this 
+installation. Otherwise, it will tell you that the system is good to go and ready for Data Carpentry!</p>
+
+<h2 id="00-short-introduction-to-python">00-short-introduction-to-Python</h2>
+
+<h3 id="tuples-challenges">Tuples Challenges</h3>
+
+<ul>
+  <li>
+    <p>What happens when you type <code class="highlighter-rouge">a_tuple[2] = 5</code> vs <code class="highlighter-rouge">a_list[1] = 5</code>?</p>
+
+    <p>As a tuple is immutable, it does not support item assignment. Elements in a list can be altered individually.</p>
+  </li>
+  <li>
+    <p>Type <code class="highlighter-rouge">type(a_tuple)</code> into the Python interpreter - what is the object type?</p>
+
+    <p><code class="highlighter-rouge">tuple</code></p>
+  </li>
+</ul>
+
+<h3 id="dictionaries-challenges">Dictionaries Challenges</h3>
+<ul>
+  <li>Can you do reassignment in a dictionary? Give it a try.</li>
+</ul>
+
+<p>Make sure it is also clear that access to ‘the second value’ is actually just about the key name. Add for example <code class="highlighter-rouge">rev[10] = "ten"</code> to clarify it is not about the position.</p>
+
+<ul>
+  <li>You should see the following output:
+<code class="highlighter-rouge">{1: 'one', 2: 'two', 3: 'three'}</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rev</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s">"apple-sauce"</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">'one'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">'apple-sauce'</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">'three'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="01-starting-with-data">01-starting-with-data</h2>
+
+<p>###Bug Note:</p>
+
+<p>Pandas &lt; .18.1 has a bug where surveys_df[‘weight’].describe() may return a runtime error.</p>
+
+<h3 id="dataframe-challenges">Dataframe Challenges</h3>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">surveys_df.columns</code></p>
+
+    <p>column names (optional: show <code class="highlighter-rouge">surveys_df.columns[4] = "plotid"</code> The index is not mutable; recap of previous lesson. Adapting the name is done by <code class="highlighter-rouge">rename</code> function <code class="highlighter-rouge">surveys_df.rename(columns={"plot_id": "plotid"})</code>)</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">surveys_df.head()</code>. Also, what does <code class="highlighter-rouge">surveys_df.head(15)</code> do?</p>
+
+    <p>Show first <code class="highlighter-rouge">N</code> lines</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">surveys_df.tail()</code></p>
+
+    <p>Show last <code class="highlighter-rouge">N</code> lines</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">surveys_df.shape</code>. Take note of the output of the shape method. What format does it return the shape of the DataFrame in?</p>
+
+    <p><code class="highlighter-rouge">type(surveys_df.shape)</code> -&gt; <code class="highlighter-rouge">Tuple</code></p>
+  </li>
+</ul>
+
+<h3 id="calculating-statistics-challenges">Calculating Statistics Challenges</h3>
+
+<ul>
+  <li>
+    <p>Create a list of unique plot ID’s found in the surveys data. Call it <code class="highlighter-rouge">plot_names</code>. How many unique plots are in the data? How many unique species are in the data?</p>
+
+    <p><code class="highlighter-rouge">plot_names = pd.unique(surveys_df["plot_id"])</code> Number of unique plot ID’s: <code class="highlighter-rouge">plot_names.size</code> or <code class="highlighter-rouge">len(plot_names)</code>; Number of unique species in the data: <code class="highlighter-rouge">len(pd.unique(surveys_df["species"]))</code></p>
+  </li>
+  <li>
+    <p>What is the difference between <code class="highlighter-rouge">len(plot_names)</code> and <code class="highlighter-rouge">surveys_df['plot_id'].nunique()</code>?</p>
+  </li>
+</ul>
+
+<p>Both do result in the same output, making it alternative ways of getting the unique values. <code class="highlighter-rouge">nunique</code> combines the count and unique value extraction.</p>
+
+<h3 id="grouping-challenges">Grouping Challenges</h3>
+
+<ul>
+  <li>
+    <p>How many recorded individuals are female <code class="highlighter-rouge">F</code> and how many male <code class="highlighter-rouge">M</code>?</p>
+
+    <p><code class="highlighter-rouge">grouped_data.count()</code></p>
+  </li>
+  <li>
+    <p>What happens when you group by two columns using the following syntax and then grab mean values?</p>
+
+    <p>The mean value for each combination of plot and sex is calculated. Remark that the mean does not make sense for each variable, so you can specify this column-wise: e.g. I want to know the last survey year, median foot-length and mean weight for each plot/sex combination:</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'plot_id'</span><span class="p">,</span><span class="s">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s">"year"</span><span class="p">:</span> <span class="s">'min'</span><span class="p">,</span> 
+                                           <span class="s">"hindfoot_length"</span><span class="p">:</span> <span class="s">'median'</span><span class="p">,</span> 
+                                           <span class="s">"weight"</span><span class="p">:</span> <span class="s">'mean'</span><span class="p">})</span><span class="err">`</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Summarize the weight values for each plot in your data.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'plot_id'</span><span class="p">])[</span><span class="s">'weight'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Another Challenge: What is another way to create a list of species and the associated count of the records in the data?</p>
+
+    <p>Instead of getting the column of the groupby and counting it, you can also count on the groupby (all columns) and make a selection of the resulting data frame: <code class="highlighter-rouge">surveys_df.groupby('species_id').count()["record_id"]</code></p>
+  </li>
+</ul>
+
+<h3 id="plotting-challenges">Plotting Challenges</h3>
+
+<ul>
+  <li>Create a plot of the average weight across all species per plot.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'plot_id'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s">"weight"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../fig/01_chall_bar_meanweight.png" alt="average weight across all species for each plot" /></p>
+
+<ul>
+  <li>Create a plot of total males versus total females for the entire datase.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">surveys_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'sex'</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s">"record_id"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="../fig/01_chall_bar_totalsex.png" alt="total males versus total females for the entire dataset" /></p>
+
+<h2 id="02-index-slice-subset">02-index-slice-subset</h2>
+
+<p>Tip: use <code class="highlighter-rouge">.head()</code> method throughout this lesson to keep your display neater for students.  Encourage students to try with and without <code class="highlighter-rouge">.head()</code> to reinforce this useful tool and then to use it or not at their preference. For example, if a student worries about keeping up in pace with typing, let them know they can skip the <code class="highlighter-rouge">.head()</code>, but that you’ll use it to keep more lines of previous steps visible.</p>
+
+<h3 id="indexing-challenges">Indexing Challenges</h3>
+
+<ul>
+  <li>
+    <p>What value does the code below return? <code class="highlighter-rouge">a[0]</code></p>
+
+    <p><code class="highlighter-rouge">1</code>, as  Python starts with element 0 (for Matlab users: this is different!)</p>
+  </li>
+  <li>
+    <p>How about this: <code class="highlighter-rouge">a[5]</code></p>
+
+    <p><code class="highlighter-rouge">IndexError</code></p>
+  </li>
+  <li>
+    <p>In the example above, calling <code class="highlighter-rouge">a[5]</code> returns an error. Why is that?</p>
+
+    <p>The list has no element with index 5 (going from 0 till 4).</p>
+  </li>
+  <li>
+    <p>What about? <code class="highlighter-rouge">a[len(a)]</code></p>
+
+    <p><code class="highlighter-rouge">IndexError</code></p>
+  </li>
+</ul>
+
+<h3 id="selection-challenges">Selection Challenges</h3>
+
+<ul>
+  <li>
+    <p>What happens when you type:</p>
+
+    <p><code class="highlighter-rouge">surveys_df[0:3]</code>
+  <code class="highlighter-rouge">surveys_df[:5]</code> slicing from first element makes 0 redundant
+  <code class="highlighter-rouge">surveys_df[-1:]</code> you can count backwards</p>
+
+    <p><em>Suggestion</em>: You can also select every Nth row: <code class="highlighter-rouge">surveys_df[1:10:2]</code>. So, how to interpret <code class="highlighter-rouge">surveys_df[::-1]</code>?</p>
+  </li>
+  <li>
+    <p>What is the difference between <code class="highlighter-rouge">surveys_df.iloc[0:4, 1:4]</code> and <code class="highlighter-rouge">surveys_df.loc[0:4, 1:4]</code>?</p>
+
+    <p>Check the position, or the name. Cfr. the second is like it would be in a dictionary, asking for the key-names. Column names 1:4 do not exist, resulting in an error. Check also the difference between <code class="highlighter-rouge">surveys_df.loc[0:4]</code> and <code class="highlighter-rouge">surveys_df.iloc[0:4]</code></p>
+  </li>
+</ul>
+
+<h3 id="advanced-selection-challenges">Advanced Selection Challenges</h3>
+
+<ul>
+  <li>
+    <p>Select a subset of rows in the <code class="highlighter-rouge">surveys_df</code> DataFrame that contain data from the year 1999 and that contain weight values less than or equal to 8. How many columns did you end up with? What did your neighbor get?</p>
+
+    <p><code class="highlighter-rouge">surveys_df[(surveys_df["year"] == 1999) &amp; (surveys_df["weight"] &lt;= 8)]</code>; when only interested in how many, 
+  the sum of <code class="highlighter-rouge">True</code> values could be used as well: <code class="highlighter-rouge">sum((surveys_df["year"] == 1999) &amp; (surveys_df["weight"] &lt;= 8))</code></p>
+  </li>
+  <li>
+    <p>You can use the <code class="highlighter-rouge">isin</code> command in Python to query a DataFrame based upon a list of values as follows: <code class="highlighter-rouge">surveys_df[surveys_df['species_id'].isin([listGoesHere])]</code>. Use the <code class="highlighter-rouge">isin</code> function to find all plots that contain particular species in the surveys DataFrame. How many records contain these values?</p>
+
+    <p>For example, using <code class="highlighter-rouge">PB</code> and <code class="highlighter-rouge">PL</code>:  <code class="highlighter-rouge">surveys_df[surveys_df['species_id'].isin(['PB', 'PL'])]['plot_id'].unique()</code> provides a list of the plots with these species involved. With <code class="highlighter-rouge">surveys_df[surveys_df['species_id'].isin(['PB', 'PL'])].shape</code> the number of records can be derived.</p>
+  </li>
+  <li>
+    <p>Create a query that finds all rows with a weight value &gt; or equal to 0.</p>
+
+    <p><code class="highlighter-rouge">surveys_df[surveys_df["weight"] &gt;= 0]</code></p>
+
+    <p><em>Suggestion</em>: Introduce already that all these slice operations are actually based on a <em>Boolean indexing</em> operation (next section in the lesson). The filter provides for each record if it satisfies (True) or not (False). The slicing itself interprets the True/False of each record.</p>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">~</code> symbol in Python can be used to return the OPPOSITE of the selection that you specify in Python. It is equivalent to is not in. Write a query that selects all rows that are NOT equal to ‘M’ or ‘F’ in the surveys data.</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">surveys_df</span><span class="p">[</span><span class="o">~</span><span class="n">surveys_df</span><span class="p">[</span><span class="s">"sex"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s">'M'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">])]</span>
+</code></pre></div></div>
+
+<h3 id="masking-challenges">Masking Challenges</h3>
+
+<ul>
+  <li>Create a new DataFrame that only contains observations with sex values that are not female or male. Assign each sex value in the new DataFrame to a new value of ‘x’. Determine the number of null values in the subset.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="o">~</span><span class="n">surveys_df</span><span class="p">[</span><span class="s">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s">'M'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">])]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">new</span><span class="p">[</span><span class="s">'sex'</span><span class="p">]</span><span class="o">=</span><span class="s">'x'</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Can verify the number of Nan values with <code class="highlighter-rouge">sum(surveys_df['sex'].isnull())</code>, which is equal to the number of none female/male records.</p>
+
+<ul>
+  <li>Create a new DataFrame that contains only observations that are of sex male or female and where weight values are greater than 0. Create a stacked bar plot of average weight by plot with male vs female values stacked for each plot.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># selection of the data with isin</span>
+<span class="n">stack_selection</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s">'M'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">]))</span> <span class="o">&amp;</span> 
+							<span class="n">surveys_df</span><span class="p">[</span><span class="s">"weight"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">][[</span><span class="s">"sex"</span><span class="p">,</span> <span class="s">"weight"</span><span class="p">,</span> <span class="s">"plot_id"</span><span class="p">]]</span>
+<span class="c"># calculate the mean weight for each plot id and sex combination: </span>
+<span class="n">stack_selection</span> <span class="o">=</span> <span class="n">stack_selection</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">,</span> <span class="s">"sex"</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="c"># and we can make a stacked bar plot from this:</span>
+<span class="n">stack_selection</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><em>Suggestion</em>: As we now the other values are all Nan values, we could also select all not null values (just preview, more on this in next lesson):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stack_selection</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">())</span> <span class="o">&amp;</span> 
+					<span class="n">surveys_df</span><span class="p">[</span><span class="s">"weight"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">][[</span><span class="s">"sex"</span><span class="p">,</span> <span class="s">"weight"</span><span class="p">,</span> <span class="s">"plot_id"</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p><img src="../fig/02_chall_stack_levelissue.png" alt="average weight for each plot per sex" /></p>
+
+<p>However, due to the <code class="highlighter-rouge">unstack</code> command, the legend header contains two levels. In order to remove this, the column naming needs to be simplified :</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stack_selection</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">stack_selection</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="../fig/02_chall_stack_level.png" alt="average weight for each plot per sex" /></p>
+
+<h2 id="03-data-types-and-format">03-data-types-and-format</h2>
+
+<h3 id="challenge---changing-types">Challenge - Changing Types</h3>
+
+<p>Pandas cannot convert types from float to int if the column contains NaN values.</p>
+
+<h3 id="challenge---counting">Challenge - Counting</h3>
+<p>surveys_df.isnull()</p>
+
+<p>If the students have trouble generating the output, or anything happens with that, there is a file
+called “sample output” that contains the data file they should generate.</p>
+
+<h2 id="04-merging-data">04-merging-data</h2>
+
+<ul>
+  <li>In the data folder, there are two survey data files: survey2001.csv and survey2002.csv. Read the data into Python and combine the files to make one new data frame. Create a plot of average plot weight by year grouped by sex. Export your results as a CSV and make sure it reads back into python properly.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># read the files:</span>
+<span class="n">survey2001</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/survey2001.csv"</span><span class="p">)</span>
+<span class="n">survey2002</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/survey2002.csv"</span><span class="p">)</span>
+<span class="c"># concatenate</span>
+<span class="n">survey_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">survey2001</span><span class="p">,</span> <span class="n">survey2002</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c"># get the weight for each year, grouped by sex:</span>
+<span class="n">weight_year</span> <span class="o">=</span> <span class="n">survey_all</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'year'</span><span class="p">,</span> <span class="s">'sex'</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s">"wgt"</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="c"># plot: </span>
+<span class="n">weight_year</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">"bar"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c"># tip(!)</span>
+</code></pre></div></div>
+<p><img src="../fig/04_chall_weight_year.png" alt="average weight for each year, grouped by sex" /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># writing to file:</span>
+<span class="n">weight_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"weight_for_year.csv"</span><span class="p">)</span>
+<span class="c"># reading it back in:</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"weight_for_year.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Create a new DataFrame by joining the contents of the surveys.csv and species.csv tables.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">merged_left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">surveys_df</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">species_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">"species_id"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Then calculate and plot the distribution of:</p>
+
+<p><strong>1. taxa per plot</strong> (number of species of each taxa per plot):</p>
+
+<p>Species distribution (number of taxa for each plot) can be derived as follows:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">merged_left</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">])[</span><span class="s">"taxa"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../fig/04_chall_ntaxa_per_plot.png" alt="taxa per plot" /></p>
+
+<p><em>Suggestion</em>: It is also possible to plot the number of individuals for each taxa in each plot (stacked bar chart):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">merged_left</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">,</span> <span class="s">"taxa"</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s">"record_id"</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'upper center'</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">))</span>
+</code></pre></div></div>
+<p>(the legend otherwise overlaps the bar plot)</p>
+
+<p><img src="../fig/04_chall_taxa_per_plot.png" alt="taxa per plot" /></p>
+
+<p><strong>2. taxa by sex by plot</strong>:
+Providing the Nan values with the M|F values (can also already be changed to ‘x’):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">merged_left</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">merged_left</span><span class="p">[</span><span class="s">"sex"</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> <span class="s">"sex"</span><span class="p">]</span> <span class="o">=</span> <span class="s">'M|F'</span>
+</code></pre></div></div>
+
+<p>Number of taxa for each plot/sex combination:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ntaxa_sex_plot</span> <span class="o">=</span> <span class="n">merged_left</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">,</span> <span class="s">"sex"</span><span class="p">])[</span><span class="s">"taxa"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ntaxa_sex_plot</span> <span class="o">=</span> <span class="n">ntaxa_sex_plot</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s">"taxa"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s">"sex"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">ntaxa_sex_plot</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">ntaxa_sex_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">"bar"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'upper center'</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">),</span>
+           <span class="n">fontsize</span><span class="o">=</span><span class="s">'small'</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../fig/04_chall_ntaxa_per_plot_sex.png" alt="taxa per plot per sex" /></p>
+
+<p><em>Suggestion (for discussion only)</em>:</p>
+
+<p>The number of individuals for each taxa in each plot per sex can be derived as well.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sex_taxa_plot</span>  <span class="o">=</span> <span class="n">merged_left</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">,</span> <span class="s">"taxa"</span><span class="p">,</span> <span class="s">"sex"</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s">'record_id'</span><span class="p">]</span>
+<span class="n">sex_taxa_plot</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'upper center'</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">),</span> 
+           <span class="n">fontsize</span><span class="o">=</span><span class="s">'small'</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../fig/04_chall_sex_taxa_plot_intro.png" alt="taxa per plot per sex" /></p>
+
+<p>This is not really the best plot choice: not readable,… A first option to make this better, is to make facets. However, pandas/matplotlib do not provide this by default. Just as a pure matplotlib example (<code class="highlighter-rouge">M|F</code> if for not-defined sex records):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sex</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s">"M"</span><span class="p">,</span> <span class="s">"F"</span><span class="p">,</span> <span class="s">"M|F"</span><span class="p">],</span> <span class="n">axs</span><span class="p">):</span>
+    <span class="n">sex_taxa_plot</span><span class="p">[</span><span class="n">sex_taxa_plot</span><span class="p">[</span><span class="s">"sex"</span><span class="p">]</span> <span class="o">==</span> <span class="n">sex</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">sex</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ax</span><span class="o">.</span><span class="n">is_last_row</span><span class="p">():</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'upper center'</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">),</span> 
+              <span class="n">fontsize</span><span class="o">=</span><span class="s">'small'</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../fig/04_chall_sex_taxa_plot.png" alt="taxa per plot per sex" /></p>
+
+<p>However, it would be better to link to <a href="https://stanford.edu/~mwaskom/software/seaborn/">Seaborn</a> and <a href="https://github.com/ellisonbg/altair">Altair</a> for tis kind of multivariate visualisations.</p>
+
+<ul>
+  <li>In the data folder, there is a plot CSV that contains information about the type associated with each plot. Use that data to summarize the number of plots by plot type.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/plots.csv"</span><span class="p">)</span>
+<span class="n">plot_info</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"plot_type"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Calculate a diversity index of your choice for control vs rodent exclosure plots. The index should consider both species abundance and number of species. You might choose the simple biodiversity index described here which calculates diversity as <code class="highlighter-rouge">the number of species in the plot / the total number of individuals in the plot = Biodiversity index.</code></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">merged_plot_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_left</span><span class="p">,</span> <span class="n">plot_info</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'plot_id'</span><span class="p">)</span>
+<span class="c"># For each plot, get the number of species for each plot</span>
+<span class="n">nspecies_plot</span> <span class="o">=</span> <span class="n">merged_plot_type</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">])[</span><span class="s">"species"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s">"nspecies"</span><span class="p">)</span>
+<span class="c"># For each plot, get the number of individuals</span>
+<span class="n">nindividuals_plot</span> <span class="o">=</span> <span class="n">merged_plot_type</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"plot_id"</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s">'record_id'</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s">"nindiv"</span><span class="p">)</span>
+<span class="c"># combine the two series</span>
+<span class="n">diversity_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">nspecies_plot</span><span class="p">,</span> <span class="n">nindividuals_plot</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c"># calculate the diversity index</span>
+<span class="n">diversity_index</span><span class="p">[</span><span class="s">'diversity'</span><span class="p">]</span> <span class="o">=</span> <span class="n">diversity_index</span><span class="p">[</span><span class="s">'nspecies'</span><span class="p">]</span><span class="o">/</span><span class="n">diversity_index</span><span class="p">[</span><span class="s">'nindiv'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Making a bar chart:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">diversity_index</span><span class="p">[</span><span class="s">'diversity'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">"barh"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Diversity index"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../fig/04_chall_diversity_index.png" alt="taxa per plot per sex" /></p>
+
+<h2 id="05-loops-and-functions">05-loops-and-functions</h2>
+
+<h3 id="basic-loop-challenges">Basic Loop Challenges</h3>
+
+<ul>
+  <li>
+    <p>What happens if we do not include the <code class="highlighter-rouge">pass</code> statement?</p>
+
+    <p><code class="highlighter-rouge">SyntaxError:</code></p>
+  </li>
+  <li>
+    <p>Rewrite the loop so that the animals are separated by commas, not new lines (Hint: You can concatenate strings using a plus sign. For example, <code class="highlighter-rouge">print(string1 + string2)</code> outputs ‘string1string2’).</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">creature</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">creature</span><span class="o">+</span><span class="s">','</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This loop also adds a comma after the last animal. A better, loop-free solution would be: <code class="highlighter-rouge">','.join(animals)</code></p>
+
+<h3 id="looping-over-dataframe-challenges">Looping Over Dataframe Challenges</h3>
+
+<ul>
+  <li>Some of the surveys you saved are missing data (they have null values that show up as NaN - Not A Number - in the DataFrames and do not show up in the text files). Modify the for loop so that the entries with null values are not included in the yearly files.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">surveys_year</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>What happens if there is no data for a year in the sequence (for example, imagine we had used 1976 as the start year in <code class="highlighter-rouge">range</code>)</p>
+
+    <p>An empty file with only the headers</p>
+  </li>
+  <li>
+    <p>Let’s say you only want to look at data from a given multiple of years. How would you modify your loop in order to generate a data file for only every 5th year, starting from 1977?</p>
+
+    <p>You could just make a list manually, however, why not check the first and last year making use of the code itself?</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_year</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c"># better overview by making variable from it</span>
+<span class="n">first_year</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span>
+<span class="n">last_year</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="s">'year'</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_year</span><span class="p">,</span> <span class="n">last_year</span><span class="p">,</span> <span class="n">n_year</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="c"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Instead of splitting out the data by years, a colleague wants to do analyses each species separately. How would you write a unique csv file for each species?</p>
+
+    <p>Similar to previous example, but use the <code class="highlighter-rouge">species_id</code> column. <code class="highlighter-rouge">surveys_df['species_id'].unique()</code>. However, the species names would improve interpretation of the file naming. A join with the species: <code class="highlighter-rouge">merged_left = pd.merge(left=surveys,right=species, how='left', on="species_id")</code> and using the <code class="highlighter-rouge">species</code> column.</p>
+  </li>
+</ul>
+
+<h3 id="functions-challenges">Functions Challenges</h3>
+
+<ul>
+  <li>Change the values of the arguments in the function and check its output.</li>
+  <li>Try calling the function by giving it the wrong number of arguments (not 2), or not assigning the function call to a variable (no <code class="highlighter-rouge">product_of_inputs =</code>).</li>
+  <li>Declare a variable inside the function and test to see where it exists (Hint: can you print it from outside the function?).</li>
+  <li>
+    <p>Explore what happens when a variable both inside and outside the function have the same name. What happens to the global variable when you change the value of the local variable?</p>
+
+    <p>Show these in a debugging environment to make this more clear!</p>
+  </li>
+</ul>
+
+<h3 id="additional-functions-challenges">Additional Functions Challenges</h3>
+
+<ul>
+  <li>Add two arguments to the functions we wrote that take the path of the directory where the files will be written and the root of the file name. Create a new set of files with a different name in a different directory.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">one_year_csv_writer</span><span class="p">(</span><span class="n">this_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">folder_to_save</span><span class="p">,</span> <span class="n">root_name</span><span class="p">):</span>
+    <span class="s">"""
+    Writes a csv file for data from a given year.
+
+    Parameters
+    ---------
+    this_year : int
+        year for which data is extracted
+    all_data: pd.DataFrame
+        DataFrame with multi-year data 
+    folder_to_save : str
+        folder to save the data files
+    root_name: str
+        root of the filenames to save the data
+    """</span>
+
+    <span class="c"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">this_year</span><span class="p">]</span>
+
+    <span class="c"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_to_save</span><span class="p">,</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">root_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_year</span><span class="p">),</span> <span class="s">'.csv'</span><span class="p">]))</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Also adapt function <code class="highlighter-rouge">yearly_data_csv_writer</code> with the additional inputs.</p>
+
+<h3 id="additional-functions-challenges-1">Additional Functions Challenges</h3>
+
+<ul>
+  <li>
+    <p>How could you use the function <code class="highlighter-rouge">yearly_data_csv_writer</code> to create a csv file for only one year? (Hint: think about the syntax for <code class="highlighter-rouge">range</code>)</p>
+
+    <p>Adapt the input arguments, e.g. 1978, 1979.</p>
+  </li>
+</ul>
+
+<h3 id="output-management-challenges">Output Management Challenges</h3>
+
+<ul>
+  <li>Make the functions return a list of the files they have written. There are many ways you can do this (and you should try them all!):
+    <ul>
+      <li>either of the functions can print to screen, 
+  just add <code class="highlighter-rouge">print("year " + str(this_year)+ " written to disk")</code> statement</li>
+      <li>either can use a return statement to give back numbers or strings to their function call,</li>
+      <li>or you can use some combination of the two.</li>
+      <li>You could also try using the os library to list the contents of directories.
+  <code class="highlighter-rouge">os.listdir</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Implementation inside the function:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">one_year_csv_writer</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">folder_to_save</span><span class="p">,</span> <span class="n">root_name</span><span class="p">))</span>
+<span class="k">return</span> <span class="n">filenames</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Explore what happens when variables are declared inside each of the functions versus in the main (non-indented) body of your code. What is the scope of the variables (where are they visible)? What happens when they have the same name but are given different values?</p>
+  </li>
+  <li>
+    <p>What type of object corresponds to a variable declared as <code class="highlighter-rouge">None</code>? (Hint: create a variable set to <code class="highlighter-rouge">None</code> and use the function <code class="highlighter-rouge">type()</code>)</p>
+
+    <p><code class="highlighter-rouge">NoneType</code></p>
+  </li>
+  <li>
+    <p>Compare the behavior of the function <code class="highlighter-rouge">yearly_data_arg_test</code> when the arguments have <code class="highlighter-rouge">None</code> as a default and when they do not have default values.</p>
+  </li>
+  <li>
+    <p>What happens if you only include a value for <code class="highlighter-rouge">start_year</code> in the function call? Can you write the function call with only a value for <code class="highlighter-rouge">end_year</code>? (Hint: think about how the function must be assigning values to each of the arguments - this is related to the need to put the arguments without default values before those with default values in the function definition!)</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">yearly_data_arg_test</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Rewrite the <code class="highlighter-rouge">one_year_csv_writer</code> and <code class="highlighter-rouge">yearly_data_csv_writer</code> functions to have keyword arguments with default values.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">one_year_csv_writer</span><span class="p">(</span><span class="n">this_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">folder_to_save</span><span class="o">=</span><span class="s">'./'</span><span class="p">,</span> <span class="n">root_name</span><span class="o">=</span><span class="s">'survey'</span><span class="p">):</span>
+    <span class="s">"""
+    Writes a csv file for data from a given year.
+
+    Parameters
+    ---------
+    this_year : int
+        year for which data is extracted
+    all_data: pd.DataFrame
+        DataFrame with multi-year data 
+    folder_to_save : str
+        folder to save the data files
+    root_name: str
+        root of the filenames to save the data
+    """</span>
+
+    <span class="c"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">this_year</span><span class="p">]</span>
+
+    <span class="c"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_to_save</span><span class="p">,</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">root_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_year</span><span class="p">),</span> <span class="s">'.csv'</span><span class="p">]))</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Modify the functions so that they do not create yearly files if there is no data for a given year and display an alert to the user (Hint: use <code class="highlighter-rouge">for</code> loops and conditional statements to do this. For an extra challenge, use <code class="highlighter-rouge">try</code> statements!)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c"># Write the new DataFrame to a csv file</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">surveys_year</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_to_save</span><span class="p">,</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">root_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_year</span><span class="p">),</span> <span class="s">'.csv'</span><span class="p">]))</span>
+        <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"No data for year "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_year</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li>The code that you have written so far to loop through the years is good, however, it is not necessarily reproducible with different datasets. For instance, what happens to the code if we have additional years of data in our CSV files? Using the tools that you learned in the previous activities, make a list of all years represented in the data. Then create a loop to process your data, that begins at the earliest year and ends at the latest year using that list.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">yearly_data_csv_writer</span><span class="p">(</span><span class="n">all_data</span><span class="p">,</span> <span class="n">yearcolumn</span><span class="o">=</span><span class="s">"year"</span><span class="p">,</span> 
+                           <span class="n">folder_to_save</span><span class="o">=</span><span class="s">'./'</span><span class="p">,</span> <span class="n">root_name</span><span class="o">=</span><span class="s">'survey'</span><span class="p">):</span>
+    <span class="s">"""
+    Writes separate csv files for each year of data.
+
+    all_data --- DataFrame with multi-year data
+    yearcolumn --- column name containing the year of the data
+    folder_to_save --- folder name to store files
+    root_name --- start of the file names stored
+    """</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="s">"year"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+    <span class="c"># "end_year" is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">one_year_csv_writer</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">folder_to_save</span><span class="p">,</span> <span class="n">root_name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filenames</span>
+</code></pre></div></div>
+
+<h2 id="06-plotting-with-ggplot">06-plotting-with-ggplot</h2>
+
+<p>If the students have trouble generating the output, or anything happens with that, there is a file
+called “sample output” that contains the data file they should have generated in lesson 3.</p>
+
+<p>iPython notebooks for plotting can be viewed in the _extras folder</p>
+
+<h2 id="07-putting-it-all-together">07-putting-it-all-together</h2>
+
+<p>Scientists often operate on mathematical equations. Being able to use them in their graphics has a lot of added value. Luckily, Matplotlib provides powerful tools for text control. One of them is the ability to use LaTeX mathematical notation, whenever text is used (you can learn more about LaTeX math notation here: https://en.wikibooks.org/wiki/LaTeX/Mathematics). To use mathematical notation, surround your text using the dollar sign (“$”).  LaTeX uses the backslash character (“") a lot. Since backslash has a special meaning in the python strings, you should replace all the LaTeX-related backslashes with two backslashes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="s">'r--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'$y=x$'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="p">,</span> <span class="s">'bs-'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'$y=x^2$'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">t</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">'g^:'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'$y=(x - 5)^2 + 5  x - </span><span class="se">\\</span><span class="s">frac{1}{2}$'</span><span class="p">)</span> <span class="c"># note the double backslash </span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'upper left'</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s">'x-large'</span><span class="p">)</span>
+    
+    <span class="c"># Note the double backslashes in the line below. </span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'This is the x axis. It can also contain math such as $</span><span class="se">\\</span><span class="s">bar{x}=</span><span class="se">\\</span><span class="s">frac{</span><span class="se">\\</span><span class="s">sum_{i=1}^{n} {x}} {N}$'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'This is the y axis'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'This is the figure title'</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><a href="https://matplotlib.org/users/mathtext.html">This page</a> contains more information.</p>
+
+
+
+      
+      <footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    <script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+  </body>
+</html>
