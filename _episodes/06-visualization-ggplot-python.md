@@ -6,15 +6,14 @@ questions:
     - " How can I visualize data in Python?"
     - " What is 'grammar of graphics'?"
 objectives:
+    - "Familiarise yourself with The Gramma of Graphics through plotinine library"
     - "Create a ggplot object."
-    - "Set universal plot settings."
-    - "Modify an existing ggplot object."
-    - "Change the aesthetics of a plot such as colour."
-    - "Edit the axis labels."
-    - "Build complex plots using a step-by-step approach."
-    - "Create scatter plots, box plots, and time series plots."
-    - "Use the facet_wrap and facet_grid commands to create a collection of plots splitting the data by a factor variable."
-    - "Create customized plot styles to meet their needs."
+    - "Explore different geom objects"
+    - "Explore other layers of ggplot, including themes and labels"
+keypoints:
+    - "plotnine is python implementation of The Gramma of Graphics"
+    - "ggplot is a set of gramma rules to make publication quality plots"
+    - "ggplot has idea of layer, building a plot is just adding different layers together"
 ---
 
 ## Introduction
@@ -67,6 +66,9 @@ Lets see if we can also include information about species and year
 
 ```python
 ggplot(survs_df, aes('weight', 'hindfoot_length', size = 'year')) + geom_point()
+```
+
+```python
 ggplot(survs_df, aes('weight', 'hindfoot_length', size = 'year', color = 'species_id')) + geom_point()
 ```
 
@@ -108,7 +110,7 @@ ggplot(survs_df, aes('year_fact', 'weight')) + \
 
 ```python
 ggplot(survs_df, aes('year_fact', 'weight')) + \
-    geom_violine()
+    geom_violin()
 ```
 
 To save an image for later
@@ -162,6 +164,22 @@ ggplot(survs_df, aes('year_fact', 'weight_log')) + \
     geom_boxplot() + \
     theme(axis_text_x = element_text(angle = 90, hjust = 1)) + \
     facet_wrap("~species_id") 
+```
+
+## Theming
+
+```python
+ggplot(survs_df, aes('year_fact', 'weight')) + \
+    geom_boxplot() + \
+    theme_bw()
+```
+
+```python
+ggplot(survs_df, aes('year_fact', 'weight_log')) + \
+    geom_boxplot() + \
+    theme(axis_text_x = element_text(angle = 90, hjust = 1)) + \
+    facet_wrap("~species_id") + \
+    theme_xkcd()
 ```
 
 ## Extra bits 1
